@@ -101,5 +101,19 @@ async def top_scorers(ctx, server_id: discord.Option(int) = None):
     text += utils.create_table(top_scorers)
     await ctx.respond(text)
 
+@bot.slash_command(description="Check what commands are available for voting in the server.",guild_ids=[config["guild_id"]])
+async def votable_cvars(ctx):
+    with open('cvars.json', 'r') as file:
+        cvars = json.load(file)
+    text = "> To call a vote, open the console (`Shift+ESC`) and type `vcall $command $argument`.\n"
+    for command in cvars:
+        text += f"\n`{command['command']}`\n"
+        text += f"```md\n{command['description']}"
+        if command['argument'] is not None:
+            text += f"\nThis command expects `{command['argument']}` as argument."
+        else:
+            text += "\nThis command expects no argument."
+        text += f"\n```"
+    await ctx.respond(text)
 
 bot.run(config["token"])

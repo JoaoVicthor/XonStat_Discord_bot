@@ -1,0 +1,62 @@
+[
+    {
+        "command": "bots",
+        "description": "Sets minimum player count to `$minplayers`. If player count is lower than `$minplayers`, adds bots.\nAlso sets `minplayers_per_team` to 2.",
+        "argument" : "minplayers"
+    },
+    {
+        "command": "nobots",
+        "description": "Disables bots.",
+        "argument" : null
+    },
+    {
+        "command": "endmatch",
+        "description": "Ends current match.",
+        "argument" : null
+    },
+    {
+        "command": "restart",
+        "description": "Restarts current match.",
+        "argument" : null
+    },
+    {
+        "command": "extendmatchtime",
+        "description": "Extends match time by 5 minutes. Goes up to 55 minutes.",
+        "argument" : null
+    },
+    {
+        "command": "reducematchtime",
+        "description": "Reduces match time by 5 minutes. Goes down to 5 minutes.",
+        "argument" : null
+    },
+    {
+        "command": "gotomap",
+        "description": "Ends current match and changes map to `$mapname`.",
+        "argument" : "mapname"
+    },
+    {
+        "command": "nextmap",
+        "description": "Sets $mapname as next map.",
+        "argument" : "mapname"
+    },
+    {
+        "command": "instagib",
+        "description": "Restarts current match and enables the Instagib mutator for current map/mode.",
+        "argument" : null
+    },
+    {
+        "command": "noinstagib",
+        "description": "Restarts current match and disables the Instagib mutator for current map/mode.",
+        "argument" : null
+    },
+    {
+        "command": "kick",
+        "description": "Kicks a player from the server. You can use their username or player #.\nUse `status 2` to get a player's #.",
+        "argument" : "username or player #"
+    },
+    {
+        "command": "shuffleteams",
+        "description": "Shuffles teams in team-based game modes like TDM and CTF.",
+        "argument" : null
+    }
+]
