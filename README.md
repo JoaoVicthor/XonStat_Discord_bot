@@ -34,6 +34,9 @@ The optional `server_id` can be used to list games from other servers.
 Ranks the players in your server.
 I bet you know what's the `server_id` for.
 
+#### - votable_cvars
+Reads `cvars.json` and shows a list of available votable commands on the Xonotic server.
+
 ## Probable future features
 * Get info about specific matches
 * Localization to Brazilian Portuguese
