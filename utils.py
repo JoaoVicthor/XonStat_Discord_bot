@@ -6,7 +6,7 @@ def create_table(dict_list):
     for k in d.keys():
       table_list.append(d[k])
   colSize = max(map(len,table_list))
-  text = "```q\n"
+  text = "```mathematica\n"
   i = 0
   for entry in table_list:
     space_size = colSize + 2 - len(entry) - emoji_count(entry) + entry.count("☢")
