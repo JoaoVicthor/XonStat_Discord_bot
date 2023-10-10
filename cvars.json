@@ -1,12 +1,22 @@
 [
     {
         "command": "bots",
-        "description": "Sets minimum player count to `$minplayers`. If player count is lower than `$minplayers`, adds bots.\nAlso sets `minplayers_per_team` to 2.",
+        "description": "Sets minimum player count to `$minplayers`.\nIf player count is lower than `$minplayers`, adds bots.\nAlso sets `minplayers_per_team` to 2.",
         "argument" : "minplayers"
     },
     {
         "command": "nobots",
         "description": "Disables bots.",
+        "argument" : null
+    },
+    {
+        "command": "normalbot",
+        "description": "Sets bot difficulty to default (100).",
+        "argument" : null
+    },
+    {
+        "command": "superbot",
+        "description": "Sets bot difficulty to 101, thus enabling superbots.\n_Be warned that these bots are a real challenge to even the best veteran players._\n - Xonotic 0.8.6 Patch Notes",
         "argument" : null
     },
     {
@@ -21,12 +31,12 @@
     },
     {
         "command": "extendmatchtime",
-        "description": "Extends match time by 5 minutes. Goes up to 55 minutes.",
+        "description": "Extends match time by 5 minutes.\nGoes up to 55 minutes.",
         "argument" : null
     },
     {
         "command": "reducematchtime",
-        "description": "Reduces match time by 5 minutes. Goes down to 5 minutes.",
+        "description": "Reduces match time by 5 minutes.\nGoes down to 5 minutes.",
         "argument" : null
     },
     {
@@ -51,7 +61,7 @@
     },
     {
         "command": "kick",
-        "description": "Kicks a player from the server. You can use their username or player #.\nUse `status 2` to get a player's #.",
+        "description": "Kicks a player from the server.\n You can use their username or player #.\nUse `status 2` to get a player's #.",
         "argument" : "username or player #"
     },
     {

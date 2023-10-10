@@ -1,7 +1,7 @@
 import json
 import discord
 from discord.ext import commands
-
+from random import choice
 import api
 import utils
 
@@ -12,6 +12,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot()
+get_random_color = lambda: choice([discord.Colour.nitro_pink(), discord.Colour.blurple(), discord.Colour.brand_green(), discord.Colour.yellow(), discord.Colour.brand_red(), discord.Colour.gold()])
 
 @bot.event
 async def on_ready():
@@ -36,15 +37,23 @@ async def player_info(ctx, player_id):
     last_played = player_info["overall_stats"]["overall"]["last_played_fuzzy"]
     total_playing_time_in_hours = float(player_info["overall_stats"]["overall"]["total_playing_time"]) / 60 / 60
 
+    embed = discord.Embed(
+        title=stripped_nick,
+        description=f"This player was first seen `{joined_fuzzy}`!",
+        color=get_random_color(),
+        url=f"https://stats.xonotic.org/player/{player_id}"
+    )
 
-    text = f"> `{stripped_nick} ({player_id})` started playing Xonotic `{joined_fuzzy}`.\n"
-    text += f"> Their playtime is `{total_playing_time_in_hours:.2f} hours` and last fragged `{last_played}`.\n\n"
-    text += f"> `{stripped_nick}` entered `{games_played}` matches, killed `{total_kills}` enemies and was murdered `{total_deaths}` times.\n"
-    text += f"> Their K/D is `{k_d_ratio:.2f}`.\n"
-    text += f"\nAccess https://stats.xonotic.org/player/{player_id} for more info."
-
+    embed.add_field(name="last played", value=f"`{last_played}`", inline=True)
+    embed.add_field(name="playtime", value="`%.2f hours`" % total_playing_time_in_hours, inline=True)
+    embed.add_field(name="games", value=f"`{games_played}`", inline=True)
+    embed.add_field(name="kills", value=f"`{total_kills}`", inline=True)
+    embed.add_field(name="deaths", value=f"`{total_deaths}`", inline=True)
+    embed.add_field(name="k/d", value="`%.2f`" % k_d_ratio, inline=True)
+    embed.set_thumbnail(url=config["thumbnail_url"])
+    embed.set_footer(text="Click on the player's name to get more info.")
     
-    await ctx.respond(text)
+    await ctx.respond(embed=embed)
 
 @bot.slash_command(description="Use your nickname to retrieve your player ID.",guild_ids=[config["guild_id"]])
 async def retrieve_player_id(ctx, player_nickname):
@@ -74,13 +83,26 @@ async def retrieve_player_id(ctx, player_nickname):
 async def server_info(ctx, server_id: discord.Option(str) = None):
     server = config["server_id"] if not server_id else server_id
     server_info = api.get_server_info(server)
-    text = f">>> `{server_info['name']} ({server_info['server_id']})` was created at `{server_info['create_dt']}`.\n"
     name_server = config["server_url"] if config["server_url"] and not server_id else server_info['ip_addr']
-    text += f"It runs `{server_info['revision']}` at http://{name_server}:{server_info['port']}.\n"
-    text += f"Access https://stats.xonotic.org/server/{server} for more info."
+
+    embed = discord.Embed(
+        title=server_info['name'],
+        description=f"This server was created at `{server_info['create_dt']}`",
+        color=get_random_color(),
+        url=f"https://stats.xonotic.org/server/{server}"
+    )
+
+    embed.add_field(name="url", value=f"`http://{name_server}:{server_info['port']}`", inline=False)
+    embed.add_field(name="revision", value=f"`{server_info['revision']}`", inline=False)
+    embed.set_thumbnail(url=config["thumbnail_url"])
+
+    footer_text = "Click on the server's name to get more info."
     if server == config["server_id"]:
-        text += f"\n\n**Thank you for joining us and keep fragging!**"
-    await ctx.respond(text)
+        footer_text += "\nThank you for joining us and keep fragging!"
+    
+    embed.set_footer(text=footer_text)
+
+    await ctx.respond(embed=embed)
 
 @bot.slash_command(description="Shows info on last matches.",guild_ids=[config["guild_id"]])
 async def last_matches(ctx, server_id: discord.Option(int) = None):
@@ -105,15 +127,21 @@ async def top_scorers(ctx, server_id: discord.Option(int) = None):
 async def votable_cvars(ctx):
     with open('cvars.json', 'r') as file:
         cvars = json.load(file)
-    text = "> To call a vote, open the console (`Shift+ESC`) and type `vcall $command $argument`.\n"
-    for command in cvars:
-        text += f"\n`{command['command']}`\n"
-        text += f"```md\n{command['description']}"
-        if command['argument'] is not None:
-            text += f"\nThis command expects `{command['argument']}` as argument."
-        else:
-            text += "\nThis command expects no argument."
-        text += f"\n```"
-    await ctx.respond(text)
 
+    embed = discord.Embed(
+        description="To call a vote, open the console (`Shift+ESC` by default) and type `vcall $command $argument`.",
+        color=get_random_color(),
+    )
+
+    for command in cvars:
+        name = command['command']
+        value = f"```md\n{command['description']}\n```"
+        if command['argument'] is not None:
+            value += f"This command expects **{command['argument']}** as argument."
+        else:
+            value += "This command expects **no** argument."
+        embed.add_field(name=name, value=value, inline=False)
+    
+    await ctx.respond(embed=embed)
+        
 bot.run(config["token"])

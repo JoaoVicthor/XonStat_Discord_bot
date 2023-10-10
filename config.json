@@ -2,5 +2,6 @@
     "token": "-",
     "guild_id": "-",
     "server_id": "-",
-    "server_url": null
+    "server_url": null,
+    "thumbnail_url": "-"
 }

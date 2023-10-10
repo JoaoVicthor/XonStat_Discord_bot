@@ -2,12 +2,13 @@ A simple bot for querying data from Xonotic's official API.
 Still a work in progress.
 
 ## Instructions
-* Install dependencies using `pip3 -r requirements.txt`
+* Install dependencies using `pip3 -r requirements.txt`.
 * Fill `config.json` with your own data:
-  * token: Your private Discord BOT token (create one at https://discord.com/developers/applications/)
+  * token: Your private Discord BOT token (create one at `https://discord.com/developers/applications/`).
   * guild_id: Your Discord Server (Guild) ID. You may have to enable Discord's developer mode to access it.
-  * server_id: Your Xonotic server ID. If you're unsure, search for your server's name at https://stats.xonotic.org/servers
+  * server_id: Your Xonotic server ID. If you're unsure, search for your server's name at `https://stats.xonotic.org/servers`.
   * server_url: Optional (default `null`). Should be filled if you use a DNS with your server (as in `example.com`. No `http://` nor slash at the end `/`).
+  * thumbnail_url: Xonotic icon URL for Discord embeds.
 * Add your previously created bot to your server.
 * Run `bot.py`.
 
