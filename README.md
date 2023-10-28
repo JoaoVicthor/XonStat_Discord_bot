@@ -20,48 +20,54 @@ Currently available commands are:
 
 #### - player_info (player_id)
 Retrieves basic player stats from the `/player` endpoint.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/player_info.png"
   alt="player_info output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 408px">
+  style="display: inline-block; margin: 0 auto; max-width: 408px">
 
 #### - retrieve_player_id (player_nickname)
 Gathers a list including up to 15 players from the `/player` endpoint which nicknames includes the provided string.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/retrieve_player_id.png"
   alt="retrieve_player_id output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 558px">
+  style="display: inline-block; margin: 0 auto; max-width: 558px">
 
 #### - server_info (server_id?)
 Queries some info about the guild's Xonotic server.
 You can use the optional `server_id` argument to retrieve info about other servers.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/server_info.png"
   alt="server_info output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 438px">
+  style="display: inline-block; margin: 0 auto; max-width: 438px">
 
 #### - last_matches (server_id?)
 Lists the last 10 matches played on the server.
 The optional `server_id` can be used to list games from other servers.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/last_matches.png"
   alt="last_matches output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 1158px">
+  style="display: inline-block; margin: 0 auto; max-width: 1158px">
 
 #### - top_scorers (server_id?)
 Ranks the players in your server.
 I bet you know what's the `server_id` for.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/top_scorers.png"
   alt="top_scorers output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 937px">
+  style="display: inline-block; margin: 0 auto; max-width: 937px">
 
 #### - votable_cvars
 Reads `cvars.json` and shows a list of available votable commands on the Xonotic server.
+
 <img
   src="https://raw.githubusercontent.com/JoaoVicthor/XonStat_Discord_bot/main/previews/votable_cvars.png"
   alt="votable_cvars output example"
-  style="display: inline-block; margin: 0 auto; padding: 8px; max-width: 599px">
+  style="display: inline-block; margin: 0 auto; max-width: 599px">
 
 ## Probable future features
 * Get info about specific matches
