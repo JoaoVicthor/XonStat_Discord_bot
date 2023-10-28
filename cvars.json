@@ -61,7 +61,7 @@
     },
     {
         "command": "kick",
-        "description": "Kicks a player from the server.\n You can use their username or player #.\nUse `status 2` to get a player's #.",
+        "description": "Kicks a player from the server.\nYou can use their username or player #.\nUse `status 2` to get a player's #.",
         "argument" : "username or player #"
     },
     {
