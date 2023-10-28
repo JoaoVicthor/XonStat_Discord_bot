@@ -20,30 +20,30 @@ Currently available commands are:
 
 #### - player_info (player_id)
 Retrieves basic player stats from the `/player` endpoint.
-[player_info output example](previews/player_info.png)
+![player_info output example](previews/player_info.png)
 
 #### - retrieve_player_id (player_nickname)
 Gathers a list including up to 15 players from the `/player` endpoint which nicknames includes the provided string.
-[retrieve_player_id output example](previews/retrieve_player_id.png)
+![retrieve_player_id output example](previews/retrieve_player_id.png)
 
 #### - server_info (server_id?)
 Queries some info about the guild's Xonotic server.
 You can use the optional `server_id` argument to retrieve info about other servers.
-[server_info output example](previews/server_info.png)
+![server_info output example](previews/server_info.png)
 
 #### - last_matches (server_id?)
 Lists the last 10 matches played on the server.
 The optional `server_id` can be used to list games from other servers.
-[last_matches output example](previews/last_matches.png)
+![last_matches output example](previews/last_matches.png)
 
 #### - top_scorers (server_id?)
 Ranks the players in your server.
 I bet you know what's the `server_id` for.
-[top_scorers output example](previews/top_scorers.png)
+![top_scorers output example](previews/top_scorers.png)
 
 #### - votable_cvars
 Reads `cvars.json` and shows a list of available votable commands on the Xonotic server.
-[votable_cvars output example](previews/votable_cvars.png)
+![votable_cvars output example](previews/votable_cvars.png)
 
 ## Probable future features
 * Get info about specific matches
