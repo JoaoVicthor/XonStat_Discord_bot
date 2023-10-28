@@ -3,5 +3,6 @@
     "guild_id": "-",
     "server_id": "-",
     "server_url": null,
-    "thumbnail_url": "-"
+    "server_image_url": null,
+    "thumbnail_url": null
 }

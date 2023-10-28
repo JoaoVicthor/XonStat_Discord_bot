@@ -35,7 +35,7 @@ async def player_info(ctx, player_id):
     total_deaths = player_info["overall_stats"]["overall"]["total_deaths"]
     k_d_ratio = player_info["overall_stats"]["overall"]["k_d_ratio"]
     last_played = player_info["overall_stats"]["overall"]["last_played_fuzzy"]
-    total_playing_time_in_hours = float(player_info["overall_stats"]["overall"]["total_playing_time"]) / 60 / 60
+    total_playing_time_in_hours = player_info["overall_stats"]["overall"]["total_playing_time"] / 60 / 60
 
     embed = discord.Embed(
         title=stripped_nick,
@@ -50,7 +50,8 @@ async def player_info(ctx, player_id):
     embed.add_field(name="kills", value=f"`{total_kills}`", inline=True)
     embed.add_field(name="deaths", value=f"`{total_deaths}`", inline=True)
     embed.add_field(name="k/d", value="`%.2f`" % k_d_ratio, inline=True)
-    embed.set_thumbnail(url=config["thumbnail_url"])
+    if config["thumbnail_url"]:
+        embed.set_thumbnail(url=config["thumbnail_url"])
     embed.set_footer(text="Click on the player's name to get more info.")
     
     await ctx.respond(embed=embed)
@@ -94,25 +95,30 @@ async def server_info(ctx, server_id: discord.Option(str) = None):
 
     embed.add_field(name="url", value=f"`http://{name_server}:{server_info['port']}`", inline=False)
     embed.add_field(name="revision", value=f"`{server_info['revision']}`", inline=False)
-    embed.set_thumbnail(url=config["thumbnail_url"])
 
     footer_text = "Click on the server's name to get more info."
     if server == config["server_id"]:
         footer_text += "\nThank you for joining us and keep fragging!"
-    
+        if config["server_image_url"]:
+            embed.set_image(url=config["server_image_url"])
+        else if config["thumbnail_url"]:
+            embed.set_thumbnail(url=config["thumbnail_url"])
+    else if config["thumbnail_url"]:
+        embed.set_thumbnail(url=config["thumbnail_url"])
     embed.set_footer(text=footer_text)
 
     await ctx.respond(embed=embed)
 
 @bot.slash_command(description="Shows info on last matches.",guild_ids=[config["guild_id"]])
 async def last_matches(ctx, server_id: discord.Option(int) = None):
+    await ctx.defer()
     server_id = config["server_id"] if not server_id else server_id
     server_info = api.get_server_info(server_id)
     match_list = api.get_last_matches(server_id)
     text = f">>> Here are the last matches played at `{server_info['name']} ({server_info['server_id']})`\n"
     text += utils.create_table(match_list)
-    text += f"\n\nAccess https://stats.xonotic.org/server/{server_id} for more info."
-    await ctx.respond(text)
+    text += f"\nAccess https://stats.xonotic.org/server/{server_id} for more info."
+    await ctx.followup.send(text)
 
 @bot.slash_command(description="So you think you're THE GOAT? Check the top scorers!",guild_ids=[config["guild_id"]])
 async def top_scorers(ctx, server_id: discord.Option(int) = None):
